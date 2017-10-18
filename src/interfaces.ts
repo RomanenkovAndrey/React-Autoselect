@@ -1,10 +1,8 @@
 import { types } from './actions/Actions';
 
-export interface Book {
-    author: string;
-    book: string; 
-    year: string;
-    index?: number;
+export interface SearchState {
+    initialCountries: string[];
+    searchedCountries: string[];
 }
 
 export interface Actions {

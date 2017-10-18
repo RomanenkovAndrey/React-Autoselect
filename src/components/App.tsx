@@ -9,8 +9,8 @@ export default class App extends Component {
     return (
       <div className="app">
         <Input/>
-        <h3>Поиск по значению</h3>
-        <SearchWindow/>
+        <h4>Поиск стран по совпадению</h4>
+        {<SearchWindow/>}
       </div>
     );
   }

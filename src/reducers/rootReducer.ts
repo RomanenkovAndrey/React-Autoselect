@@ -1,33 +1,41 @@
-import { Actions } from '../interfaces';
+import { Actions, SearchState } from '../interfaces';
 import { types } from '../actions/Actions';
 
-const initialCountries: string[] = [
+const initialState: SearchState = { 
+  initialCountries: [
       'Австралия',
       'Австрия',
       'Англия',
       'Германия',
       'Россия',
       'Ямайка'
-    ];
+    ], 
+    searchedCountries: []
+  };
 
-let searchedCountries: string[] = []; // в этот массив запишутся найденные страны
-
-export default function rootReducer(state: string[] = initialCountries, action: Actions): string[] { 
+export default function rootReducer(state: SearchState = initialState, action: Actions): SearchState { 
 
     switch (action.type) {
 
       case types.SEARCH_COUNTRY: {
-        let initCountries: string[]  = [...state]; 
-        let searchValue: string = action.payload; // значение, которое будем искать
-        let counter: number = 0;
+
+        const newState = {...state};
+
+        const initCountries = newState.initialCountries; 
+        const searchedCountries = [];
+        const searchValue = action.payload; // значение, которое будем искать
+
+        let counter = 0;
 
         for (let i = 0; i < initCountries.length; i++) {
           // tslint:disable-next-line:no-bitwise
-          if (~searchValue.indexOf(initCountries[i])) { // если найдено
-            searchedCountries[counter++] = initCountries[i]; // запишем в массив
+          if (~initCountries[i].indexOf(searchValue)) { // если найдено
+            searchedCountries[counter] = initCountries[i]; // запишем в массив
+            counter++; 
           }
         }
-        return searchedCountries; // вернём всё, что найдено
+        newState.searchedCountries = searchedCountries; // вот где меняется массив найденных стран
+        return newState; 
       }
 
     default:

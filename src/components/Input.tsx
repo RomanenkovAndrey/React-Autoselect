@@ -31,13 +31,13 @@ class Input extends Component<DispatchProps, State> {
 
     // tslint:disable-next-line:no-any
     onChangeHandler = (e: any) => {
-        const val: string = e.target.value; // что насчёт пробелов?
+        const val: string = e.target.value; 
 
         this.setState ({
           value: val
         });
 
-        this.props.actions.searchCountry(val);
+        this.props.actions.searchCountry(val); // сразу ищем введённую страну
     }
   
     render() {
@@ -52,7 +52,7 @@ class Input extends Component<DispatchProps, State> {
             id="search_value"
             value={value} 
             onChange={this.onChangeHandler}
-            placeholder="Поиск стран по алфавиту"
+            placeholder="Введите страну"
             // tslint:disable-next-line:jsx-boolean-value
             autoFocus
           />
@@ -68,4 +68,5 @@ function mapDispatchToProps(dispatch: Dispatch <State>): DispatchProps {
     };
   }
 
-export default connect<void, DispatchProps, void>(null, mapDispatchToProps)(Input); // Возможно void и null не совпадут
+export default connect<void, DispatchProps, void>(null, mapDispatchToProps)(Input); 
+// Возможно void и null не совпадут
