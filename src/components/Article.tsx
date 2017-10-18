@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { IBook, IActions } from '../interfaces';
+import { Book, Actions } from '../interfaces';
 
-interface IProps {
+interface Props {
   index: number;
-  item: IBook;
+  item: Book;
 
   libraryActions: {
-      deleteBook(delIndex: number): IActions;
-      saveBook(updIndex: number): IActions;
+      deleteBook(delIndex: number): Actions;
+      saveBook(updIndex: number): Actions;
     };
 }
 
 // формирование ответов на запрос
-export default class Article extends Component<IProps> {
+export default class Article extends Component<Props> {
 
     render() {
       const { author, book, year } = this.props.item;

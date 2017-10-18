@@ -2,10 +2,8 @@ import * as React from 'react';
 import { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
-
-interface Props {
-  
-}
+import { Actions } from '../interfaces';
+import * as actions from '../actions/Actions';
 
 interface State {
   value: string;
@@ -13,14 +11,14 @@ interface State {
 
 interface DispatchProps {
   actions: {
-
+    searchCountry(value: string): Actions;
   };
 }
 
 // ввод информации в текстовое поле
-class Input extends Component<Props & DispatchProps, State> {
+class Input extends Component<DispatchProps, State> {
 
-    constructor(props: Props & DispatchProps) {
+    constructor(props: DispatchProps) {
       super(props);
       this.state = this.getDefaultState();
     }
@@ -30,17 +28,16 @@ class Input extends Component<Props & DispatchProps, State> {
         value: '' 
       };
     }
-    
+
     // tslint:disable-next-line:no-any
     onChangeHandler = (e: any) => {
-        const value:string = e.target.value; // что насчёт пробелов?
+        const val: string = e.target.value; // что насчёт пробелов?
 
-        this.setState({
-          data: {
-            ...this.state.data,
-            ...tempItem
-          }
+        this.setState ({
+          value: val
         });
+
+        this.props.actions.searchCountry(val);
     }
   
     render() {
@@ -48,14 +45,14 @@ class Input extends Component<Props & DispatchProps, State> {
       const value = this.state.value;
 
       return (
-        <div className="add">
+        <div className="search">
           <input
             type="text"
-            className="add__author"
-            id="author"
+            className="search_input"
+            id="search_value"
             value={value} 
             onChange={this.onChangeHandler}
-            placeholder="Имя автора"
+            placeholder="Поиск стран по алфавиту"
             // tslint:disable-next-line:jsx-boolean-value
             autoFocus
           />
@@ -64,16 +61,11 @@ class Input extends Component<Props & DispatchProps, State> {
     }
   }
   
-function mapStateToProps (state: State): Props {
-    return {
-
-    };
-  }
-
 function mapDispatchToProps(dispatch: Dispatch <State>): DispatchProps {
     return {
-      libraryActions: bindActionCreators<any>(libraryActions, dispatch)
+      // tslint:disable-next-line:no-any
+      actions: bindActionCreators<any>(actions, dispatch)
     };
   }
 
-export default connect<Props, DispatchProps, void>(mapStateToProps, mapDispatchToProps)(Input);
+export default connect<void, DispatchProps, void>(null, mapDispatchToProps)(Input); // Возможно void и null не совпадут

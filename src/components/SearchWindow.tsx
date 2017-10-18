@@ -3,34 +3,30 @@ import * as React from 'react';
 import Article from './Article';
 import { connect, Dispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as libraryActions from '../actions/LibraryActions';
-import { IBook, IActions } from '../interfaces';
-import { IData } from '../interfaces';
+import * as actions from '../actions/Actions';
+import { Book } from '../interfaces';
 
-interface IProps {
-  data: IBook[];
+interface Props {
+  searchedCountries: string[];
 }
 
-interface IDispatchProps {
-  libraryActions: {
-    deleteBook(delIndex: number): IActions;
-    saveBook(updIndex: number): IActions;
+interface DispatchProps {
+  actions: {
+
   };
 }
 
-interface IState {
-  data: IBook;
+interface State {
+ 
 }
 
-class Library extends Component<IProps & IDispatchProps, IState> {
+class Library extends Component<Props & DispatchProps, State> {
 
   render() {
     // tslint:disable-next-line:no-shadowed-variable
-    const {data, libraryActions} = this.props;
-    let libraryTemplate;
 
     if (data.length > 0) {
-      libraryTemplate = data.map((item: IBook, index: number) => {
+      libraryTemplate = data.map((item: Book, index: number) => {
         return (
           <div key={index}>
             <Article item={item} index={index} libraryActions={libraryActions}/> 
@@ -49,16 +45,17 @@ class Library extends Component<IProps & IDispatchProps, IState> {
   }
 }
 
-function mapStateToProps (state: IData): IProps { // чтобы не класть весть Global State, кладём лишь его часть - IData
+function mapStateToProps (state: Data): Props { 
   return {
     data: state.data
   };
 }
 
-function mapDispatchToProps (dispatch: Dispatch <IState>): IDispatchProps {
+function mapDispatchToProps (dispatch: Dispatch <State>): DispatchProps {
   return {
-    libraryActions: bindActionCreators<any>(libraryActions, dispatch)
+    // tslint:disable-next-line:no-any
+    actions: bindActionCreators<any>(actions, dispatch)
   };
 }
 
-export default connect<IProps, IDispatchProps, void>(mapStateToProps, mapDispatchToProps)(Library);
+export default connect<Props, DispatchProps, void>(mapStateToProps, mapDispatchToProps)(Library);
