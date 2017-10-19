@@ -27,6 +27,7 @@ export default function rootReducer(state: SearchState = initialState, action: A
 
         let counter = 0;
 
+        if (searchValue !== '') { // если всё стёрли, то ничего и не ищем
         for (let i = 0; i < initCountries.length; i++) {
           // tslint:disable-next-line:no-bitwise
           if (~initCountries[i].indexOf(searchValue)) { // если найдено
@@ -34,6 +35,7 @@ export default function rootReducer(state: SearchState = initialState, action: A
             counter++; 
           }
         }
+      }
         newState.searchedCountries = searchedCountries; // вот где меняется массив найденных стран
         return newState; 
       }

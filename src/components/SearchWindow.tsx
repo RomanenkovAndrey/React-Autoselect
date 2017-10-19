@@ -39,7 +39,7 @@ class SearchWindow extends Component<Props, State> {
   }
 }
 
-function mapStateToProps (state: State): Props { // здесь должен быть глобальный state или он и так тут?
+function mapStateToProps (state: State): Props {
   return {
     searchedCountries: state.searchedCountries
   };
