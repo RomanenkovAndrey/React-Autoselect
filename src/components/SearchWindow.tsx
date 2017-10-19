@@ -2,9 +2,11 @@ import { Component } from 'react';
 import * as React from 'react';
 import Article from './Article';
 import { connect } from 'react-redux';
+import { SearchState } from '../interfaces';
 
 interface Props {
   searchedCountries: string[];
+  isLoading: boolean;
 }
 
 interface State {
@@ -33,15 +35,18 @@ class SearchWindow extends Component<Props, State> {
 
     return (
       <div className="сountry">
-        {countryTemplate}
+        {
+          this.props.isLoading ? <h1>Loading...</h1> : countryTemplate
+        }
       </div>
     );
   }
 }
 
-function mapStateToProps (state: State): Props {
+function mapStateToProps (state: SearchState): Props {
   return {
-    searchedCountries: state.searchedCountries
+    searchedCountries: state.searchedCountries,
+    isLoading: state.isLoading
   };
 }
 

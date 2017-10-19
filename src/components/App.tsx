@@ -10,7 +10,7 @@ export default class App extends Component {
       <div className="app">
         <Input/>
         <h4>Поиск стран по совпадению</h4>
-        {<SearchWindow/>}
+        <SearchWindow/>
       </div>
     );
   }

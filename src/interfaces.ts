@@ -1,8 +1,8 @@
 import { types } from './actions/Actions';
 
 export interface SearchState {
-    initialCountries: string[];
     searchedCountries: string[];
+    isLoading: boolean;
 }
 
 export interface Actions {

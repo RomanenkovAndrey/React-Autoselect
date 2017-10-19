@@ -11,7 +11,7 @@ interface State {
 
 interface DispatchProps {
   actions: {
-    searchCountry(value: string): Actions;
+    searchCountryAsync(value: string): Actions;
   };
 }
 
@@ -37,7 +37,7 @@ class Input extends Component<DispatchProps, State> {
           value: val
         });
 
-        this.props.actions.searchCountry(val); // сразу ищем введённую страну
+        this.props.actions.searchCountryAsync(val); // сразу ищем введённую страну
     }
   
     render() {
