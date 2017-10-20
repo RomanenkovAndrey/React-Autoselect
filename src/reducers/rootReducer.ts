@@ -20,7 +20,7 @@ export default function rootReducer(state: SearchState = initialState, action: A
       case types.SEARCH_COUNTRY_SUCCESS: {
         const newState = {...state};
   
-        const initCountries = action.payload.list; 
+        const initCountries = action.payload.list;  // нужно достать поле result из RestResponse
         const searchedCountries = [];
         const searchValue = action.payload.value; // значение, которое будем искать
   
