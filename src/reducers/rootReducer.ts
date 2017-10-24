@@ -10,7 +10,9 @@ const initialState: SearchState = {
       'Россия',
       'Ямайка'
     ], 
-    searchedCountries: []
+    searchedCountries: [],
+    value: '',
+    visible: true
   };
 
 export default function rootReducer(state: SearchState = initialState, action: Actions): SearchState { 
@@ -38,6 +40,14 @@ export default function rootReducer(state: SearchState = initialState, action: A
       }
         newState.searchedCountries = searchedCountries; // вот где меняется массив найденных стран
         return newState; 
+      }
+
+      case types.SAVE_STATE: {
+        
+        const newState = {...state};
+
+        // здесь сохраним наше value
+        // затем в другом action уже в Input вставим это value (когда visible снова станет true)
       }
 
     default:

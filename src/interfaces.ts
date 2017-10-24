@@ -3,6 +3,8 @@ import { types } from './actions/Actions';
 export interface SearchState {
     initialCountries: string[];
     searchedCountries: string[];
+    value: string;
+    visible: boolean;
 }
 
 export interface Actions {

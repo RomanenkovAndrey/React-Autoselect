@@ -11,7 +11,7 @@ p {
   width: 600px;
 }
 .article {
-  background: #FFF;
+  background: rgb(255, 255, 255);
   border: 1px solid rgba(0, 89, 181, 0.82);
   width: 600px;
   margin: 0 0 15px;
@@ -25,4 +25,17 @@ p {
   left: 30%;
   top:0;
   padding-top:70px;
+}
+
+.search__button {
+  background-color: rgb(118, 197, 64);
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 25px;
+  width: 200px;
+}
+
+.article:hover {
+  background: rgb(31, 204, 54);
+  box-shadow: 2px 2px 4px rgb(235, 213, 21);
 }

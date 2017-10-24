@@ -9,6 +9,10 @@ interface State {
   value: string;
 }
 
+interface Props {
+  value: string;
+}
+
 interface DispatchProps {
   actions: {
     searchCountry(value: string): Actions;
@@ -16,17 +20,11 @@ interface DispatchProps {
 }
 
 // ввод информации в текстовое поле
-class Input extends Component<DispatchProps, State> {
+class Input extends Component<Props&DispatchProps, State> {
 
-    constructor(props: DispatchProps) {
+    constructor(props: Props&DispatchProps) {
       super(props);
-      this.state = this.getDefaultState();
-    }
-
-    getDefaultState = () => {
-      return {
-        value: '' 
-      };
+      this.state = {value: this.props.value };
     }
 
     // tslint:disable-next-line:no-any
@@ -61,6 +59,12 @@ class Input extends Component<DispatchProps, State> {
     }
   }
   
+function mapStateToProps (state: State): Props {
+    return {
+      value: state.value
+    };
+  }
+
 function mapDispatchToProps(dispatch: Dispatch <State>): DispatchProps {
     return {
       // tslint:disable-next-line:no-any
@@ -68,5 +72,5 @@ function mapDispatchToProps(dispatch: Dispatch <State>): DispatchProps {
     };
   }
 
-export default connect<void, DispatchProps, void>(null, mapDispatchToProps)(Input); 
+export default connect<Props, DispatchProps, void>(mapStateToProps, mapDispatchToProps)(Input); 
 // Возможно void и null не совпадут
