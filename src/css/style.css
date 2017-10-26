@@ -9,6 +9,10 @@ p {
 
 .search_input{
   width: 600px;
+  border: 1px solid rgba(0, 89, 181, 0.82);
+  padding: 3px 5px;
+  border-radius: 5px;
+  height: 20px;
 }
 .article {
   background: rgb(255, 255, 255);

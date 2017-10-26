@@ -19,13 +19,15 @@ interface Props {
 interface DispatchProps {
   actions: {
     saveState(): Actions;
+    setInput(): Actions;
   };
 }
 
-class App extends Component <Props&DispatchProps, State> { // null for props
+class App extends Component <Props&DispatchProps, State> { 
 
-  constructor() {
-    super();
+  constructor(props: Props&DispatchProps) {
+    super(props);
+    // tslint:disable-next-line:no-console
     this.state = {visible: this.props.visible};
   }
 
@@ -33,8 +35,10 @@ class App extends Component <Props&DispatchProps, State> { // null for props
   onButtonShowSearchClickHandler = (e: any) => {
     e.preventDefault();
 
-    if (this.state.visible === true) { // при скрытии окошка поиска запоминаем данные
+    if (this.state.visible) { // при скрытии окошка поиска запоминаем данные
       this.props.actions.saveState();
+    } else { // когда разворачиваем окошко, устанавливаем сохраненное в input
+      this.props.actions.setInput();
     }
 
     this.setState({visible: !this.state.visible });
