@@ -8,13 +8,12 @@ const initialState: SearchState = {
       'Англия',
       'Германия',
       'Россия',
+      'США',
+      'Украина',
       'Ямайка'
     ], 
     searchedCountries: [],
-    value: '',
-    tempValue: '',
-    visible: true,
-    flagSetInput: false
+    tempValue: ''
   };
 
 export default function rootReducer(state: SearchState = initialState, action: Actions): SearchState { 
@@ -42,23 +41,12 @@ export default function rootReducer(state: SearchState = initialState, action: A
       }
         newState.searchedCountries = searchedCountries; // вот где меняется массив найденных стран
         return newState; 
-
       }
 
-      case types.SAVE_STATE: {
-        
-        const newState = {...state};
-        newState.tempValue = newState.value; // здесь сохраним наше value
-        return newState;
-        
-      }
-
-      case types.SET_INPUT: {
+      case types.SAVE_TEMP: {
 
         const newState = {...state};
-        newState.value = newState.tempValue; // затем в другом action уже в Input вставим это value 
-        newState.tempValue = '';
-        newState.flagSetInput = true;
+        newState.tempValue = action.payload; // сюда пишем, что получили из input'а
         return newState;
       }
 

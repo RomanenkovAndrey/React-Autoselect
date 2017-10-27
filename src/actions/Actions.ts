@@ -2,8 +2,7 @@ import { Actions } from '../interfaces';
 
 export enum types {
     SEARCH_COUNTRY = 'SEARCH_COUNTRY',
-    SAVE_STATE = 'SAVE_STATE',
-    SET_INPUT = 'SET_INPUT'
+    SAVE_TEMP = 'SAVE_TEMP'
 }
 
 export function searchCountry(value: string): Actions { 
@@ -13,14 +12,9 @@ export function searchCountry(value: string): Actions {
       };
     }
 
-export function saveState(): Actions { 
+export function saveTempValue(value: string): Actions { 
         return {
-            type: types.SAVE_STATE
-        };
-      }
-
-export function setInput(): Actions { 
-        return {
-            type: types.SET_INPUT
+            type: types.SAVE_TEMP,
+            payload: value
         };
       }

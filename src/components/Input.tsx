@@ -8,18 +8,16 @@ import * as actions from '../actions/Actions';
 interface State {
   value: string;
   tempValue: string;
-  flagSetInput: boolean;
 }
 
 interface Props {
-  value: string;
   tempValue: string;
-  flagSetInput: boolean;
 }
 
 interface DispatchProps {
   actions: {
     searchCountry(value: string): Actions;
+    saveTempValue(value: string): Actions;
   };
 }
 
@@ -29,10 +27,15 @@ class Input extends Component<Props&DispatchProps, State> {
     constructor(props: Props&DispatchProps) {
       super(props);
       this.state = {
-        value: this.props.value,
-        flagSetInput: this.props.flagSetInput,
+        value: '',
         tempValue: this.props.tempValue
        };
+    }
+
+    componentWillMount() {
+      this.setState({ 
+        value: this.props.tempValue
+      });
     }
 
     // tslint:disable-next-line:no-any
@@ -43,17 +46,13 @@ class Input extends Component<Props&DispatchProps, State> {
           value: val
         });
 
+        this.props.actions.saveTempValue(val);
         this.props.actions.searchCountry(val); // сразу ищем введённую страну
     }
   
     render() {
       let {value} = this.state;
-  
-      // Блок, который нужно изменить (правильно передать флаг)
-      if (this.props.flagSetInput) {
-         value = this.props.tempValue;
-      }
-
+ 
       return (
         <div className="search">
           <input
@@ -73,9 +72,7 @@ class Input extends Component<Props&DispatchProps, State> {
   
 function mapStateToProps (state: State): Props {
     return {
-      value: state.value,
-      tempValue: state.tempValue,
-      flagSetInput: state.flagSetInput
+      tempValue: state.tempValue
     };
   }
 
