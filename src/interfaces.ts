@@ -4,6 +4,7 @@ export interface SearchState {
     initialCountries: string[];
     searchedCountries: string[];
     tempValue: string;
+    articleToInputFlag: boolean;
 }
 
 export interface Actions {

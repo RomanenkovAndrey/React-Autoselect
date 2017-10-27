@@ -13,7 +13,8 @@ const initialState: SearchState = {
       'Ямайка'
     ], 
     searchedCountries: [],
-    tempValue: ''
+    tempValue: '',
+    articleToInputFlag: false
   };
 
 export default function rootReducer(state: SearchState = initialState, action: Actions): SearchState { 
@@ -47,6 +48,12 @@ export default function rootReducer(state: SearchState = initialState, action: A
 
         const newState = {...state};
         newState.tempValue = action.payload; // сюда пишем, что получили из input'а
+        return newState;
+      }
+
+      case types.SET_INPUT: {
+        const newState = {...state};
+        newState.articleToInputFlag = action.payload; 
         return newState;
       }
 

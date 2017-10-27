@@ -8,16 +8,19 @@ import * as actions from '../actions/Actions';
 interface State {
   value: string;
   tempValue: string;
+  articleToInputFlag: boolean;
 }
 
 interface Props {
   tempValue: string;
+  articleToInputFlag: boolean;
 }
 
 interface DispatchProps {
   actions: {
     searchCountry(value: string): Actions;
     saveTempValue(value: string): Actions;
+    setInputFlag(flag: boolean): Actions;
   };
 }
 
@@ -28,7 +31,8 @@ class Input extends Component<Props&DispatchProps, State> {
       super(props);
       this.state = {
         value: '',
-        tempValue: this.props.tempValue
+        tempValue: this.props.tempValue,
+        articleToInputFlag: this.props.articleToInputFlag
        };
     }
 
@@ -36,6 +40,15 @@ class Input extends Component<Props&DispatchProps, State> {
       this.setState({ 
         value: this.props.tempValue
       });
+    }
+
+    componentWillUpdate(nextProps: Props) {
+      if (nextProps.articleToInputFlag) {
+       this.setState({ 
+         value: nextProps.tempValue
+       }); // ЗДЕСЬ ПЕТЛЯ
+      }
+      this.props.actions.setInputFlag(false);
     }
 
     // tslint:disable-next-line:no-any
@@ -72,7 +85,8 @@ class Input extends Component<Props&DispatchProps, State> {
   
 function mapStateToProps (state: State): Props {
     return {
-      tempValue: state.tempValue
+      tempValue: state.tempValue,
+      articleToInputFlag: state.articleToInputFlag
     };
   }
 
