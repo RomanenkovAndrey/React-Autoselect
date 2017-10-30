@@ -14,14 +14,20 @@ p {
   border-radius: 5px;
   height: 20px;
 }
+
+.сountry{
+  height: 170px;
+  overflow: auto;
+}
+
 .article {
   background: rgb(255, 255, 255);
   border: 1px solid rgba(0, 89, 181, 0.82);
+  border-bottom: 1px dashed rgba(0, 89, 181, 0.82);
+  border-top: none;
   width: 600px;
-  margin: 0 0 15px;
   box-shadow: 2px 2px 5px -1px rgb(4, 58, 133);
-  padding: 3px 5px;
-  border-radius: 5px;
+  padding: 5px 5px;
 }
 
 .app{

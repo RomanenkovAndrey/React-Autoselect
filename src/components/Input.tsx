@@ -46,9 +46,10 @@ class Input extends Component<Props&DispatchProps, State> {
       if (nextProps.articleToInputFlag) {
        this.setState({ 
          value: nextProps.tempValue
-       }); // ЗДЕСЬ ПЕТЛЯ
+       });
       }
       this.props.actions.setInputFlag(false);
+      this.props.actions.searchCountry(nextProps.tempValue);
     }
 
     // tslint:disable-next-line:no-any
